@@ -6,12 +6,16 @@
   <meta name="admaven-placement" content="BqdY6rTr8" />
   <title>Unblocked Games</title>
 
-  <!-- ✅ Google AdSense Script -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4623021982506157"
-     crossorigin="anonymous"></script>
+  <!-- ✅ Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4623021982506157"
+    crossorigin="anonymous"></script>
 
-  <!-- ✅ ProfitablerateCPM Script -->
-  <script type="text/javascript" src="//pl27018894.profitableratecpm.com/c7/d2/0a/c7d20aa3a7f2b63bbb43a07a165583ad.js"></script>
+  <!-- ✅ ProfitablerateCPM -->
+  <script src="//pl27018894.profitableratecpm.com/c7/d2/0a/c7d20aa3a7f2b63bbb43a07a165583ad.js"></script>
+
+  <!-- ✅ EffectiveGateCPM (GLOBAL / POP) -->
+  <script src="https://pl27018894.effectivegatecpm.com/c7/d2/0a/c7d20aa3a7f2b63bbb43a07a165583ad.js"></script>
 
   <style>
     html, body {
@@ -20,12 +24,11 @@
       background: #000;
       color: #fff;
       font-family: 'Segoe UI', sans-serif;
-      height: 100%;
     }
 
     header {
       text-align: center;
-      padding: 1.5rem 1rem;
+      padding: 1.5rem;
       background-color: #111;
       font-size: 2rem;
       font-weight: bold;
@@ -46,21 +49,18 @@
     }
 
     .game-column {
+      flex: 1;
+      max-width: 1324px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      flex: 1;
-      max-width: 1324px;
     }
 
     .game-wrapper {
       width: 100%;
-      background-color: #000;
       border: 3px solid #222;
       border-radius: 8px;
       overflow: hidden;
-      position: relative;
-      max-width: 100%;
     }
 
     iframe {
@@ -71,102 +71,106 @@
     }
 
     .fullscreen-btn {
-      margin-top: 0.75rem;
+      margin-top: 12px;
       padding: 10px 20px;
-      background-color: black;
-      color: white;
-      border: 2px solid white;
-      border-radius: 5px;
+      background: #000;
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 6px;
       font-size: 16px;
       cursor: pointer;
-      transition: all 0.2s ease;
     }
 
     .fullscreen-btn:hover {
-      background-color: #111;
+      background: #111;
+    }
+
+    .bottom-ad {
+      margin: 20px auto;
+      text-align: center;
     }
 
     @media (max-width: 900px) {
-      .ad {
-        display: block;
-        margin: 10px auto
-      }
-
       .container {
         flex-direction: column;
         align-items: center;
       }
 
-      .game-wrapper {
-        width: 100%;
-        max-width: 100%;
+      .ad {
+        margin: 10px 0;
       }
     }
   </style>
 </head>
+
 <body>
 
-  <header>
-    Fun Games - Unblocked
-  </header>
+<header>Fun Games – Unblocked</header>
+<h1 style="text-align:center;">Trouble loading? Try refreshing the page</h1>
 
-  <h1 style="text-align:center;">Trouble loading? Try refreshing the page</h1>
+<div class="container">
 
-  <div class="container">
+  <!-- ✅ LEFT Adsterra 160x600 -->
+  <div class="ad">
+    <script>
+      atOptions = {
+        'key' : 'b787854a835849689d77d4fb0a51ae13',
+        'format' : 'iframe',
+        'height' : 600,
+        'width' : 160,
+        'params' : {}
+      };
+    </script>
+    <script src="https://www.highperformanceformat.com/b787854a835849689d77d4fb0a51ae13/invoke.js"></script>
+  </div>
 
-    <!-- ✅ Left Adsterra Ad -->
-    <div class="ad">
-      <script type="text/javascript">
-        atOptions = {
-          'key' : 'b787854a835849689d77d4fb0a51ae13',
-          'format' : 'iframe',
-          'height' : 600,
-          'width' : 160,
-          'params' : {}
-        };
-      </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/b787854a835849689d77d4fb0a51ae13/invoke.js"></script>
+  <!-- 🎮 GAME -->
+  <div class="game-column">
+    <div class="game-wrapper">
+      <iframe
+        id="gameFrame"
+        src="https://ubg98.github.io/super-liquid-soccer-unblockedz.html"
+        allowfullscreen>
+      </iframe>
     </div>
 
-    <div class="game-column">
-      <div class="game-wrapper" id="gameContainer">
-        <iframe
-          id="gameFrame"
-          src="https://ubg98.github.io/super-liquid-soccer-unblockedz.html"
-          allow="fullscreen"
-          allowfullscreen
-          allowtransparency="true">
-        </iframe>
-      </div>
+    <button class="fullscreen-btn" onclick="openFullscreen()">
+      Open Fullscreen
+    </button>
 
-      <button class="fullscreen-btn" onclick="openFullscreen()">
-        Open Fullscreen
-      </button>
-    </div>
-
-    <!-- ✅ Right Adsterra Ad -->
-    <div class="ad">
-      <script type="text/javascript">
-        atOptions = {
-          'key' : 'b787854a835849689d77d4fb0a51ae13',
-          'format' : 'iframe',
-          'height' : 600,
-          'width' : 160,
-          'params' : {}
-        };
+    <!-- ✅ EffectiveGateCPM CONTAINER AD (NEW) -->
+    <div class="bottom-ad">
+      <script async="async" data-cfasync="false"
+        src="https://pl26737971.effectivegatecpm.com/c6e0f7e66d37d7acd376a980cdeb14b6/invoke.js">
       </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/b787854a835849689d77d4fb0a51ae13/invoke.js"></script>
+      <div id="container-c6e0f7e66d37d7acd376a980cdeb14b6"></div>
     </div>
   </div>
 
-  <script>
-    function openFullscreen() {
-      const iframe = document.getElementById("gameFrame");
-      if (iframe && iframe.src) {
-        window.open(iframe.src, '_blank').focus();
-      }
+  <!-- ✅ RIGHT Adsterra 160x600 -->
+  <div class="ad">
+    <script>
+      atOptions = {
+        'key' : 'b787854a835849689d77d4fb0a51ae13',
+        'format' : 'iframe',
+        'height' : 600,
+        'width' : 160,
+        'params' : {}
+      };
+    </script>
+    <script src="https://www.highperformanceformat.com/b787854a835849689d77d4fb0a51ae13/invoke.js"></script>
+  </div>
+
+</div>
+
+<script>
+  function openFullscreen() {
+    const iframe = document.getElementById("gameFrame");
+    if (iframe && iframe.src) {
+      window.open(iframe.src, "_blank");
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
