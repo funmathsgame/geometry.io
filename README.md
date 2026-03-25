@@ -1,122 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wait For It</title>
+  <title>YouTube Search Tool</title>
   <style>
-    *{ box-sizing:border-box }
-    body{
-      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto;
-      background:#0b0b0b; color:white;
-      display:flex; align-items:center; justify-content:center; height:100vh;
-    }
-    .card{
-      width:min(520px,92vw);
-      background:#111;
-      border-radius:24px;
-      padding:32px;
-      text-align:center;
-      box-shadow:0 30px 80px #000;
-      transition:transform .2s ease;
-    }
-    h1{ margin:0 0 10px; font-size:2.2rem }
-    p{ opacity:.75 }
-    .screen{ display:none }
-    .screen.active{ display:block }
-    .circle{
-      width:200px; height:200px;
-      border-radius:50%;
-      margin:30px auto;
-      background:#333;
-      display:flex; align-items:center; justify-content:center;
-      font-size:1.5rem; font-weight:700;
-      user-select:none;
-      cursor:pointer;
-      transition:background .15s ease, transform .1s ease;
-    }
-    .circle:active{ transform:scale(.97) }
-    .btn{
-      border:none; border-radius:999px;
-      padding:12px 22px;
-      font-size:1rem;
-      cursor:pointer;
-      background:white; color:black;
-    }
-    .tiny{ font-size:.9rem; opacity:.6 }
+    body { font-family: Arial; padding: 20px; }
+    input, button, select { padding: 8px; margin: 5px; }
+    .result { margin: 10px 0; }
   </style>
 </head>
 <body>
 
-<div class="card">
-  <div class="screen active" id="start">
-    <h1>Wait For It</h1>
-    <p>Click the circle only when it turns green.</p>
-    <button class="btn" onclick="begin()">Start</button>
-  </div>
+<h2>YouTube Search</h2>
 
-  <div class="screen" id="game">
-    <div class="circle" id="circle">Wait…</div>
-    <p class="tiny">Don’t click early.</p>
-  </div>
+<select id="mode">
+  <option value="video">Search Videos</option>
+  <option value="channel">Search Users</option>
+</select>
 
-  <div class="screen" id="result">
-    <h1 id="time">—</h1>
-    <p id="msg"></p>
-    <button class="btn" onclick="reset()">Try again</button>
-  </div>
-</div>
+<input type="text" id="query" placeholder="Enter search..." />
+<button onclick="search()">Search</button>
+
+<div id="results"></div>
 
 <script>
-let startTime, timeout, ready=false;
-const circle=document.getElementById('circle');
+const API_KEY = "YOUR_API_KEY";
 
-function show(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+async function search() {
+  const mode = document.getElementById("mode").value;
+  const query = document.getElementById("query").value;
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = "Loading...";
 
-function begin(){
-  show('game');
-  ready=false;
-  circle.style.background='#333';
-  circle.textContent='Wait…';
+  if (mode === "video") {
+    const res = await fetch(
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=10&key=${API_KEY}`
+    );
+    const data = await res.json();
 
-  const delay=1000+Math.random()*3000;
-  timeout=setTimeout(()=>{
-    ready=true;
-    startTime=performance.now();
-    circle.style.background='#2ecc71';
-    circle.textContent='CLICK';
-  },delay);
-}
+    resultsDiv.innerHTML = "";
+    data.items.forEach(item => {
+      const videoId = item.id.videoId;
+      const title = item.snippet.title;
+      const channel = item.snippet.channelTitle;
+      const url = `https://www.youtube.com/watch?v=${videoId}`;
 
-circle.onclick=()=>{
-  if(!ready){
-    clearTimeout(timeout);
-    end('Too early 😬','red');
-    return;
+      resultsDiv.innerHTML += `
+        <div class="result">
+          <b>${title}</b><br>
+          Channel: ${channel}<br>
+          <a href="${url}" target="_blank">${url}</a>
+        </div>
+      `;
+    });
+
+  } else {
+    const res = await fetch(
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=channel&maxResults=20&key=${API_KEY}`
+    );
+    const data = await res.json();
+
+    resultsDiv.innerHTML = "<h3>Select a channel:</h3>";
+
+    data.items.forEach(item => {
+      const channelId = item.id.channelId;
+      const name = item.snippet.title;
+
+      resultsDiv.innerHTML += `
+        <div class="result">
+          <button onclick="loadChannel('${channelId}')">${name}</button>
+        </div>
+      `;
+    });
   }
-  const t=Math.round(performance.now()-startTime);
-  let msg='';
-  if(t<200) msg='Cheetah reflexes 🐆';
-  else if(t<300) msg='Pretty fast 🦊';
-  else if(t<450) msg='Not bad 🐕';
-  else msg='Are you sleepy? 🦥';
-
-  document.getElementById('time').textContent=t+' ms';
-  document.getElementById('msg').textContent=msg;
-  show('result');
 }
 
-function end(text,color){
-  circle.style.background=color;
-  document.getElementById('time').textContent=text;
-  document.getElementById('msg').textContent='Try again.';
-  show('result');
-}
+async function loadChannel(channelId) {
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = "Loading videos...";
 
-function reset(){ show('start'); }
+  const res = await fetch(
+    `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&order=date&type=video&maxResults=10&key=${API_KEY}`
+  );
+  const data = await res.json();
+
+  resultsDiv.innerHTML = "<h3>Recent Videos:</h3>";
+
+  data.items.forEach(item => {
+    const videoId = item.id.videoId;
+    const title = item.snippet.title;
+    const url = `https://www.youtube.com/watch?v=${videoId}`;
+
+    resultsDiv.innerHTML += `
+      <div class="result">
+        <b>${title}</b><br>
+        <a href="${url}" target="_blank">${url}</a>
+      </div>
+    `;
+  });
+}
 </script>
 
 </body>
